@@ -1,0 +1,204 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1f0036, #001f3f, #360048);
+  font-family: "Segoe UI", sans-serif;
+  color: #ffffff;
+}
+
+header.main-header {
+  width: 100%;
+  background: linear-gradient(90deg, #ff0040, #7d00ff, #007bff);
+  padding: 10px 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  position: relative;
+  z-index: 1000;
+  min-width: 320px;
+}
+
+.nav-container {
+  width: 100%;
+  margin: 0;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.logo {
+  height: 70px;
+}
+
+.main-nav {
+  display: flex;
+  gap: 20px;
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.main-nav a:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.main-nav a.active {
+  background-color: #fff;
+  color: #000;
+}
+
+main {
+  flex: 1;
+}
+
+#cartContainer {
+  width: 90%;
+  max-width: 1200px;
+  margin: 20px auto;
+  box-sizing: border-box;
+}
+
+/* 購物車商品卡片 */
+.cart-item {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  width: 100%;
+  border-radius: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
+  background: linear-gradient(135deg, #1b1f38, #2c3e50);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  transition: box-shadow 0.3s ease;
+}
+
+.cart-item:hover {
+  box-shadow: 0 6px 20px rgba(255, 0, 128, 0.4);
+}
+
+.cart-item img {
+  flex-shrink: 0;
+  width: 120px;
+  height: 120px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-right: 20px;
+  margin-bottom: 10px;
+}
+
+.cart-info {
+  flex: 1 1 300px;
+  min-width: 200px;
+}
+
+.cart-item > input.select-item {
+  margin-right: 15px;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
+
+/* 按鈕區 */
+.actions {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.actions button {
+  cursor: pointer;
+  border: none;
+  background: linear-gradient(to right, #00ffe7, #ff00d4);
+  color: #000;
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-weight: bold;
+  transition: transform 0.3s, background 0.3s;
+}
+
+.actions button:disabled {
+  background: #555;
+  color: #aaa;
+  cursor: not-allowed;
+}
+
+.actions button:hover:not(:disabled) {
+  transform: scale(1.05);
+  background: linear-gradient(to right, #ff33a8, #00c3ff);
+}
+
+/* 總金額與下單清空區 */
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 15px 20px;
+  background: linear-gradient(135deg, #1c1c2b, #292945);
+  font-weight: bold;
+  font-size: 16px;
+  color: #fff;
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto 20px;
+  flex-wrap: wrap;
+  border-radius: 12px;
+  box-shadow: 0 0 10px rgba(255, 0, 255, 0.2);
+}
+
+.footer #totalPrice {
+  flex-grow: 1;
+  font-size: 18px;
+  color: #00ffe7;
+}
+
+.footer button {
+  padding: 10px 16px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 15px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.footer #checkoutBtn {
+  background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
+  color: white;
+}
+
+.footer #checkoutBtn:hover {
+  transform: scale(1.05);
+  background: linear-gradient(to right, #f12711, #f5af19);
+}
+
+.footer #clearCartBtn {
+  background: linear-gradient(to right, #e53935, #e35d5b);
+  color: white;
+}
+
+.footer #clearCartBtn:hover {
+  transform: scale(1.05);
+  background: linear-gradient(to right, #ff6a00, #ee0979);
+}
+
+.conpyright {
+  width: 100%;
+  text-align: center;
+  margin: 20px 0 0;
+  padding: 10px 0px;
+  background-color: #3e5293;
+  color: #70f6df;
+}

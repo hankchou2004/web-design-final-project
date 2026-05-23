@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>My Store 賣場首頁</title>
+    <link href="../css/index.css" rel="stylesheet" type="text/css" />
+  </head>
+  <body>
+    <header class="main-header">
+      <div class="nav-container">
+        <img class="logo" src="../image/logo.png" alt="Store Logo">
+        <nav class="main-nav">
+          <a href="index.html" class="nav-link">首頁</a>
+          <a href="../page4/page4.html" class="nav-link">關於我們</a>
+          <a href="../page1/page1.html" class="nav-link">商品頁</a>
+          <a href="../page3/page3.html" class="nav-link">購物車</a>
+          <a href="../page2/page2.html" class="nav-link">賣場管理</a>
+        </nav>
+      </div>
+    </header>
+
+    <section class="shopee-container">
+      <div class="shopee-inner-container">
+
+        <div class="section-header">
+          <h2>🔥 熱門推薦商品</h2>
+          <div class="floating-search-bar">
+            <input type="text" name="search" id="searchInput" placeholder="搜尋商品...">
+            <button type="submit" id="searchBtn"
+              onclick="location.href='../page1/page1.html?search=' + encodeURIComponent(document.getElementById('searchInput').value)">
+              搜尋
+            </button>
+          </div>
+        </div>
+
+        <!-- 推薦商品卡片由 JS 插入 -->
+        <div class="shopee-grid" id="featuredGrid"></div>
+
+      </div>
+    </section>
+
+    <div class="conpyright">
+      &copy; 2025 My Store 賣場 - 淡江大學資訊系統專題製作
+    </div>
+
+    <script src="../js/setProducts.js"></script>
+    <script src="../js/index.js"></script>
+  </body>
+</html>

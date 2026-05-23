@@ -1,0 +1,215 @@
+/* 通用重置 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  width: 100%;
+  overflow-x: hidden;
+  font-family: "Segoe UI", sans-serif;
+  background: linear-gradient(135deg, #292b63, #3f2b96, #ff4f81);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  color: #ffffff;
+}
+
+/* Header */
+header.main-header {
+  width: 100%;
+  background: linear-gradient(90deg, #ff0040, #7d00ff, #007bff);
+  padding: 10px 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  position: relative;
+  z-index: 1000;
+  min-width: 320px;
+}
+
+.nav-container {
+  width: 100%;
+  margin: 0;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.logo {
+  height: 70px;
+}
+
+.main-nav {
+  display: flex;
+  gap: 20px;
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.main-nav a:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.main-nav a.active {
+  background-color: #fff;
+  color: #000;
+}
+
+/* 主要內容區 */
+main, .shopee-container {
+  flex: 1 0 auto;
+  width: 100%;
+}
+
+/* 熱門推薦商品區塊 */
+.shopee-container {
+  background: linear-gradient(120deg, #1c1b38, #3e1f47, #6f2dbd);
+  padding: 30px 0;
+  width: 100%;
+}
+
+.shopee-inner-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.shopee-inner-container h2 {
+  font-size: 26px;
+  font-weight: bold;
+  color: #ffde59;
+  text-shadow: 0 0 10px #ffde59, 0 0 20px #ff00ff;
+  margin-bottom: 20px;
+}
+
+/* 商品網格 */
+.shopee-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+  gap: 20px;
+}
+
+/* 商品卡片 */
+.shopee-card {
+  background: linear-gradient(145deg, #2a2d63, #3d1a52);
+  border: 2px solid #ff85a2;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 0 10px #ff85a2, 0 0 15px #ff00ff33;
+}
+
+.shopee-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 0 20px #ff00ff, 0 0 30px #00ffe7;
+}
+
+.shopee-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-bottom: 2px solid #ff66cc;
+}
+
+.shopee-card .title {
+  font-size: 15px;
+  padding: 12px;
+  height: 40px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  color: #ffffff;
+  text-align: center;
+}
+
+.shopee-card .price {
+  padding: 0 10px 12px;
+  color: #00ffe7;
+  font-weight: bold;
+  font-size: 17px;
+  text-align: center;
+  text-shadow: 0 0 6px #00ffe7;
+}
+
+/* footer */
+.conpyright {
+  flex-shrink: 0;
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+  background-color: #3e5293;
+  color: #70f6df;
+  margin-top: aut;
+}
+
+/* 搜尋列 */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+  flex-wrap: wrap;
+}
+
+.floating-search-bar {
+  display: flex;
+  gap: 8px;
+  background: #251c37;
+  padding: 6px 10px;
+  border-radius: 8px;
+  border: 2px solid #00ffff;
+  box-shadow: 0 0 10px #00ffff;
+}
+
+.floating-search-bar input[type="text"] {
+  padding: 6px 10px;
+  font-size: 14px;
+  background-color: #342e68;
+  color: white;
+  width: 160px;
+  border: none;
+  border-radius: 4px;
+  outline: none;
+}
+
+.floating-search-bar input[type="text"]::placeholder {
+  color: #99ffff;
+}
+
+.floating-search-bar input[type="text"]:focus {
+  border: 1px solid #00ffff;
+  box-shadow: 0 0 6px #00ffff;
+  color: #00ffff;
+}
+
+.floating-search-bar button {
+  padding: 6px 12px;
+  background: linear-gradient(145deg, #00ffff, #ff66cc);
+  color: #ffffff;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  letter-spacing: 1px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  box-shadow: 0 0 6px rgba(0, 255, 255, 0.5);
+  transition: background 0.3s, transform 0.2s;
+}
+
+.floating-search-bar button:hover {
+  background: linear-gradient(145deg, #33ffff, #ff99cc);
+  transform: scale(1.05);
+}

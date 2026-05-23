@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>商品頁</title>
+  <link href="../css/page1.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+  <header class="main-header">
+    <div class="nav-container">
+      <img class="logo" src="../image/logo.png" alt="Store Logo">
+      <nav class="main-nav">
+        <a href="../index/index.html" class="nav-link">首頁</a>
+        <a href="../page4/page4.html" class="nav-link">關於我們</a>
+        <a href="page1.html" class="nav-link">商品頁</a>
+        <a href="../page3/page3.html" class="nav-link">購物車</a>
+        <a href="../page2/page2.html" class="nav-link">賣場管理</a>
+      </nav>
+    </div>
+  </header>
+
+  <div class="section-header">
+    <div class="floating-search-bar">
+      <input type="text" name="search" id="searchInput" placeholder="搜尋商品...">
+      <button type="button" id="searchBtn">搜尋</button>
+    </div>
+  </div>
+
+  <div id="productGrid" class="shopee-grid"></div>
+  <div id="noResult" class="no-result" style="display:none;">查無搜尋結果</div>
+
+  <div class="conpyright">
+    &copy; 2025 My Store 賣場 - 淡江大學資訊系統專題製作
+  </div>
+
+  <script src="../js/setProducts.js"></script>
+  <script src="../js/page1.js"></script>
+</body>
+</html>

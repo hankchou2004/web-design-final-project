@@ -1,0 +1,186 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1c1c2d 0%, #0f0f1f 100%);
+  color: #f3f3f3;
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+}
+
+header.main-header {
+  width: 100%;
+  background: linear-gradient(90deg, #ff0040, #7d00ff, #007bff);
+  padding: 10px 0;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  position: relative;
+  z-index: 1000;
+  min-width: 320px;
+}
+
+.nav-container {
+  width: 100%;
+  margin: 0;
+  padding: 0 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.logo {
+  height: 70px;
+}
+
+.main-nav {
+  display: flex;
+  gap: 20px;
+}
+
+.main-nav a {
+  text-decoration: none;
+  color: white;
+  font-size: 14px;
+  padding: 6px 12px;
+  border-radius: 4px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.main-nav a:hover {
+  background-color: rgba(0, 0, 0, 0.2);
+}
+
+.main-nav a.active {
+  background-color: #fff;
+  color: #000;
+}
+
+main {
+  flex: 1;
+  padding: 20px;
+}
+
+.about-us {
+  width: 90%;
+  margin: 40px auto;
+  padding: 30px 20px;
+  background: rgba(30, 30, 50, 0.9);
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(83, 51, 237, 0.4);
+}
+
+.about-us h1 {
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #00afca;
+  margin-bottom: 20px;
+  text-align: center;
+  letter-spacing: 2px;
+}
+
+.about-us p {
+  font-size: 1.1rem;
+  line-height: 1.8;
+  color: #e0e0e0;
+  text-align: justify;
+  margin-bottom: 1em;
+}
+
+.conpyright {
+  width: 100%;
+  text-align: center;
+  padding: 10px 0;
+  background-color: #3e5293;
+  color: #70f6df;
+}
+
+.chat-toggle {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: linear-gradient(to right, #4e54c8, #8f94fb);
+  color: #fff;
+  padding: 10px 16px;
+  border-radius: 30px;
+  font-size: 16px;
+  cursor: pointer;
+  z-index: 1100;
+  box-shadow: 0 2px 8px rgba(78, 84, 200, 0.5);
+  transition: background 0.3s;
+}
+
+.chat-toggle:hover {
+  background: linear-gradient(to right, #6c70dd, #a1a5ff);
+}
+
+.chat-float {
+  position: fixed;
+  bottom: 80px;
+  right: 20px;
+  width: 320px;
+  background: #1e1e2f;
+  border: 2px solid #6c70dd;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+  padding: 14px;
+  z-index: 998;
+  font-family: 'Segoe UI', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.chat-float form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.chat-float textarea {
+  width: 100%;
+  height: 80px;
+  padding: 10px;
+  resize: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: inherit;
+  background: #2c2c3c;
+  color: #fff;
+  border: 1px solid #444;
+  box-sizing: border-box;
+}
+
+#chatForm button[type="submit"] {
+  align-self: flex-end;
+  background: #4e54c8;
+  color: white;
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+#chatForm button[type="submit"]:hover {
+  background: #6c70dd;
+}
+
+#chatStatus {
+  font-size: 13px;
+  color: #8f94fb;
+  margin-top: 4px;
+}
+
+.hidden {
+  display: none;
+}
