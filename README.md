@@ -14,8 +14,8 @@
 
 ```
 project/
-├── index/
-│   ├── index.html          # 首頁
+├── index.html              # 首頁
+│     
 ├── page1/
 │   ├── page1.html          # 商品頁
 ├── page2/
