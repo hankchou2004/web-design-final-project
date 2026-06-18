@@ -1,88 +1,138 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <title>賣場管理</title>
-  <link href="../css/page2.css" rel="stylesheet" type="text/css" />
-  
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>賣場管理 | 電競次元商城</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="../css/global.css" rel="stylesheet">
+  <link href="../css/page2.css" rel="stylesheet">
 </head>
 <body>
   <header class="main-header">
     <div class="nav-container">
-      <img class="logo" src="../image/logo.png" alt="Store Logo" />
+      <img class="logo" id="siteLogo" src="../image/logo.png" alt="電競次元商城">
       <nav class="main-nav">
-        <a href="../index.html" class="nav-link">首頁</a>
-        <a href="../page4/page4.html" class="nav-link">關於我們</a>
-        <a href="../page1/page1.html" class="nav-link">商品頁</a>
-        <a href="../page3/page3.html" class="nav-link">購物車</a>
-        <a href="page2.html" class="nav-link">賣場管理</a>
+        <a href="../index.html">首頁</a>
+        <a href="../page4/page4.html">關於我們</a>
+        <a href="../page1/page1.html">商品頁</a>
+        <a href="../page3/page3.html">購物車</a>
+        <a href="page2.html" class="active">賣場管理</a>
       </nav>
     </div>
   </header>
 
   <!-- 登入區塊 -->
   <div id="loginContainer">
-    <h2>🔐 請先登入</h2>
-    <div class="login-box">
-      <input type="text" id="username" placeholder="首次登入帳號:mystore" />
-      <br />
-      <input type="password" id="password" placeholder="首次登入密碼:412410077" />
-      <br />
-      <button onclick="checkLogin()">登入</button>
-      <button id="resetAdminAccountBtn" type="button" style="margin-left: 10px;">還原預設帳號密碼</button>
+    <div class="login-wrap">
+      <div class="login-box">
+        <div class="login-icon">⚙</div>
+        <h2>賣場管理後台</h2>
+        <p class="login-hint">請輸入管理員帳號密碼登入</p>
+        <input type="text" id="username" placeholder="帳號（預設：mystore）" />
+        <input type="password" id="password" placeholder="密碼（預設：412410077）" />
+        <button class="btn-primary login-btn" onclick="checkLogin()">登入</button>
+        <button id="resetAdminAccountBtn" type="button" class="btn-ghost reset-hint-btn">還原預設帳號密碼</button>
+      </div>
     </div>
   </div>
 
   <!-- 管理區塊（預設隱藏） -->
   <div id="adminSection" style="display:none;">
-    <button id="logoutBtn" style="display:none; margin-left: 10px;">登出</button>
 
-    <div id="accountSettings" style="display:none; margin-top:30px;">
-      <h2>修改帳號密碼</h2>
-      <form id="accountForm">
-        <label>舊密碼：<input type="password" id="oldPassword" required /></label><br />
-        <label>新帳號：<input type="text" id="newUsername" required /></label><br />
-        <label>新密碼：<input type="password" id="newPassword" required /></label><br />
-        <button type="submit">儲存修改</button>
-      </form>
+    <div class="admin-topbar">
+      <span class="admin-title">賣場管理後台</span>
+      <button id="logoutBtn" class="btn-ghost" style="display:none;">登出</button>
     </div>
 
-    <div id="logoChangeSection">
-  <h2>更換 Logo</h2>
-  <input type="file" id="logoFileInput" accept="image/*" />
-  <button id="changeLogoBtn">更換 Logo</button>
-  <button id="resetLogoBtn" >還原預設Logo</button>
-</div>
-    <h1>新增商品</h1>
-    <form id="addProductForm">
-      <label>商品名稱：<input type="text" id="productName" required /></label><br />
-      <label>價格：<input type="number" id="productPrice" required min="0" /></label><br />
-      <label>圖片上傳：<input type="file" id="productImageFile" accept="image/*" /></label><br />
-      <button type="submit">新增商品</button>
-    </form>
+    <div class="admin-main">
 
-    <hr />
+      <!-- 左側：帳號 + Logo -->
+      <div class="admin-sidebar">
 
-    <h1>商品列表</h1>
-    <div id="productButtonsContainer">
-  <button id="clearBtn">清空所有商品</button>
-  <button id="restoreDefaultBtn">還原為預設商品</button>
-</div>
-    
-    <div id="noResult" style="display:none;">目前沒有任何商品</div>
-    <div id="productGrid"></div>
+        <div class="admin-card" id="accountSettings" style="display:none;">
+          <h3>修改帳號密碼</h3>
+          <form id="accountForm">
+            <div class="form-group">
+              <label>舊密碼</label>
+              <input type="password" id="oldPassword" required />
+            </div>
+            <div class="form-group">
+              <label>新帳號</label>
+              <input type="text" id="newUsername" required />
+            </div>
+            <div class="form-group">
+              <label>新密碼</label>
+              <input type="password" id="newPassword" required />
+            </div>
+            <button type="submit" class="btn-primary">儲存修改</button>
+          </form>
+        </div>
+
+        <div class="admin-card" id="logoChangeSection">
+          <h3>更換 Logo</h3>
+          <div class="logo-actions">
+            <input type="file" id="logoFileInput" accept="image/*" class="file-input" />
+            <label for="logoFileInput" class="btn-outline file-label">選擇圖片</label>
+            <button id="changeLogoBtn" class="btn-primary">更換 Logo</button>
+            <button id="resetLogoBtn" class="btn-ghost">還原預設</button>
+          </div>
+        </div>
+
+        <div class="admin-card" id="aboutSection">
+          <h3>修改「關於我們」</h3>
+          <textarea id="aboutContent" rows="8" placeholder="輸入關於我們的內容..."></textarea>
+          <div class="about-actions">
+            <button id="saveAboutBtn" class="btn-primary">儲存修改</button>
+            <button id="resetAboutBtn" class="btn-ghost">還原預設</button>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- 右側：商品管理 -->
+      <div class="admin-content">
+
+        <div class="admin-card">
+          <h3>新增商品</h3>
+          <form id="addProductForm" class="add-product-form">
+            <div class="form-group">
+              <label>商品名稱</label>
+              <input type="text" id="productName" required />
+            </div>
+            <div class="form-group">
+              <label>價格（NT$）</label>
+              <input type="number" id="productPrice" required min="0" />
+            </div>
+            <div class="form-group">
+              <label>商品圖片</label>
+              <input type="file" id="productImageFile" accept="image/*" class="file-input" />
+              <label for="productImageFile" class="btn-outline file-label" style="margin-top:6px;">選擇圖片</label>
+            </div>
+            <button type="submit" class="btn-primary">新增商品</button>
+          </form>
+        </div>
+
+        <div class="admin-card">
+          <div class="product-list-header">
+            <h3>商品列表</h3>
+            <div class="product-list-actions">
+              <button id="clearBtn" class="btn-danger">清空所有商品</button>
+              <button id="restoreDefaultBtn" class="btn-ghost">還原預設商品</button>
+            </div>
+          </div>
+          <div id="noResult" style="display:none;" class="no-result">目前沒有任何商品</div>
+          <div id="productGrid" class="admin-product-grid"></div>
+        </div>
+
+      </div>
+    </div>
   </div>
 
-  <section id="aboutSection" >
-    <h2>修改「關於我們」</h2>
-    <textarea id="aboutContent" rows="10" style="width: 100%;"></textarea>
-    <br />
-    <button id="saveAboutBtn">儲存修改</button>
-    <button id="resetAboutBtn">還原為預設</button>
-  </section>
-
   <footer class="conpyright">
-    &copy; 2025 My Store 賣場 - 淡江大學資訊系統專題製作
+    &copy; 2025 電競次元商城 · 淡江大學資訊系統專題製作
   </footer>
 
   <script src="../js/setProducts.js"></script>

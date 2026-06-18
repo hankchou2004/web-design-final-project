@@ -1,608 +1,374 @@
-/* 全域設定 */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  color: white;
-}
-main {
+/* ================================================================
+   page2.css — 賣場管理後台專屬樣式
+   ================================================================ */
+
+/* ── Login Screen ─────────────────────────────────────────────── */
+/* JS sets loginContainer.style.display = "block", so avoid flex here */
+#loginContainer {
   flex: 1;
+  padding: 72px 24px 48px;
 }
 
-button,
-input[type="button"],
-input[type="submit"] {
-  color: #000;
-  background: linear-gradient(45deg, #ff0080, #00ffe7, #ffbf00);
-  background-size: 300% 300%;
-  padding: 12px 24px;
-  border-radius: 20px;
-  border: none;
-  font-weight: 800;
-  font-size: 1.1rem;
-  cursor: pointer;
-  box-shadow: 0 0 18px #ff0080;
-  transition: background-position 1.5s ease, box-shadow 0.3s ease;
-}
-
-button:hover,
-input[type="button"]:hover,
-input[type="submit"]:hover {
-  background-position: 100% 0;
-  box-shadow: 0 0 28px #00fff7;
-}
-
-/* 統一按鈕類別 */
-.btn-style {
-  background: linear-gradient(45deg, #ff0080, #00ffe7, #ffbf00);
-  background-size: 300% 300%;
-  padding: 8px 16px;
-  border-radius: 20px;
-  border: none;
-  font-weight: 800;
-  font-size: 0.9rem;
-  color: #000;
-  cursor: pointer;
-  box-shadow: 0 0 18px #ff0080;
-  transition: background-position 1.5s ease, box-shadow 0.3s ease;
-}
-
-.btn-style:hover {
-  background-position: 100% 0;
-  box-shadow: 0 0 28px #00fff7;
-}
-
-/* 移除重複的logout-btn背景定義，只保留class方便JS操作或識別 */
-.logout-btn {
-  /* 可保留特殊調整，例如大小或額外 margin */
-}
-
-/* 登入盒子裡的按鈕 */
-.login-box button {
-  padding: 14px 30px;
-  border-radius: 20px;
-  font-weight: 800;
-  font-size: 1.1rem;
-  box-shadow: 0 0 15px #ff0057;
-  transition: background-position 1.5s ease, box-shadow 0.3s ease;
-  color: #000;
-  background: linear-gradient(45deg, #ff0057, #00ffe7, #ffbf00);
-  background-size: 300% 300%;
-  cursor: pointer;
-}
-
-.login-box button:hover {
-  background-position: 100% 0;
-  box-shadow: 0 0 25px #00ffe7;
-}
-
-/* 特殊按鈕繼續保留個別風格 */
-#clearBtn,
-#restoreDefaultBtn {
-  background: linear-gradient(45deg, #ff00a0, #00fff7, #ff9500);
-  background-size: 300% 300%;
-  border: none;
-  padding: 14px 28px;
-  border-radius: 22px;
-  font-weight: 900;
-  cursor: pointer;
-  margin-right: 14px;
-  box-shadow: 0 0 22px #ff00a0;
-  transition: background-position 1.8s ease, box-shadow 0.4s ease;
-  color: #000;
-}
-
-#clearBtn:hover,
-#restoreDefaultBtn:hover {
-  background-position: 100% 0;
-  box-shadow: 0 0 35px #00fff7;
-}
-
-/* 表單送出按鈕 */
-#accountSettings button[type="submit"],
-#addProductForm button {
-  background: linear-gradient(45deg, #ff0080, #00ffe7, #ffbf00);
-  background-size: 300% 300%;
-  padding: 14px 28px;
-  border-radius: 22px;
-  border: none;
-  font-weight: 900;
-  font-size: 1.2rem;
-  color: #000;
-  cursor: pointer;
-  box-shadow: 0 0 18px #ff0080;
-  transition: background-position 1.8s ease, box-shadow 0.4s ease;
-}
-
-#accountSettings button:hover,
-#addProductForm button:hover {
-  background-position: 100% 0;
-  box-shadow: 0 0 30px #00fff7;
-}
-
-/* 其他類似的按鈕也可加上 .btn-style 方便統一調整 */
-
-/* header樣式 */
-header.main-header {
+.login-wrap {
   width: 100%;
-  background: linear-gradient(90deg, #ff0040, #7d00ff, #007bff);
-  padding: 10px 0;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  max-width: 420px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.login-box {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  padding: 48px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  box-shadow: 0 0 60px rgba(0, 0, 0, 0.5), 0 0 0 1px var(--border);
   position: relative;
-  z-index: 1000;
-  min-width: 320px;
+  overflow: hidden;
 }
 
-.nav-container {
+/* Top animated RGB line on login card */
+.login-box::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg,
+    var(--cyan) 0%, var(--purple) 40%, var(--pink) 75%, var(--cyan) 100%);
+  background-size: 200% 100%;
+  animation: rgbSlide 4s linear infinite;
+}
+
+.login-icon {
+  font-size: 36px;
+  text-align: center;
+  margin-bottom: 4px;
+  opacity: 0.8;
+}
+
+.login-box h2 {
+  font-family: var(--font-brand);
+  font-size: 20px;
+  color: var(--text-primary);
+  text-align: center;
+  letter-spacing: 0.08em;
+}
+
+.login-hint {
+  font-size: 13px;
+  color: var(--text-muted);
+  text-align: center;
+  font-family: var(--font-body);
+  margin-bottom: 4px;
+}
+
+.login-btn {
   width: 100%;
-  margin: 0;
-  padding: 0 20px;
+  margin-top: 4px;
+}
+
+.reset-hint-btn {
+  width: 100%;
+  font-size: 12px;
+}
+
+/* ── Admin Layout ─────────────────────────────────────────────── */
+#adminSection {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 32px;
+  background: var(--bg-surface);
+  border-bottom: 1px solid var(--border);
+}
+
+.admin-title {
+  font-family: var(--font-brand);
+  font-size: 16px;
+  color: var(--cyan);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.admin-main {
+  display: flex;
+  gap: 24px;
+  padding: 24px 32px 48px;
+  max-width: 1400px;
+  width: 100%;
+  margin: 0 auto;
+  align-items: flex-start;
+}
+
+/* Left sidebar */
+.admin-sidebar {
+  width: 320px;
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Right content */
+.admin-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Admin Card ───────────────────────────────────────────────── */
+.admin-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  padding: 24px;
+}
+
+.admin-card h3 {
+  font-family: var(--font-brand);
+  font-size: 14px;
+  color: var(--text-secondary);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 18px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+/* ── Form Groups ──────────────────────────────────────────────── */
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  margin-bottom: 14px;
+}
+
+.form-group:last-of-type {
+  margin-bottom: 18px;
+}
+
+/* ── File Input ───────────────────────────────────────────────── */
+.file-input {
+  display: none;
+}
+
+.file-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 9px 20px;
+  font-size: 13px;
+}
+
+/* ── Logo Actions ─────────────────────────────────────────────── */
+.logo-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.logo-actions .btn-primary,
+.logo-actions .btn-ghost {
+  width: 100%;
+}
+
+/* ── Add Product Form ─────────────────────────────────────────── */
+.add-product-form .btn-primary {
+  width: 100%;
+}
+
+/* ── Product List Header ──────────────────────────────────────── */
+.product-list-header {
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 18px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
 }
 
-.logo {
-  height: 70px;
+.product-list-header h3 {
+  margin-bottom: 0;
+  padding-bottom: 0;
+  border-bottom: none;
 }
 
-.main-nav {
+.product-list-actions {
   display: flex;
-  gap: 20px;
+  gap: 10px;
+  flex-wrap: wrap;
 }
 
-.main-nav a {
-  text-decoration: none;
-  color: white;
-  font-size: 14px;
-  padding: 6px 12px;
-  border-radius: 4px;
-  transition: background 0.3s, color 0.3s;
-}
-
-.main-nav a:hover {
-  background-color: rgba(0, 0, 0, 0.2);
-}
-
-.main-nav a.active {
-  background-color: #fff;
-  color: #000;
-}
-
-.flex-container {
-  display: flex;
-}
-.child {
-  flex-shrink: 0;
-  max-width: 300px;
-}
-
-
-/* 調整 max-width 以讓內容更寬 */
-#adminSection {
-  max-width: 1600px; /* 從 1200px 增加 */
-  margin: 50px auto 80px;
-  padding: 30px 40px;
-  background: linear-gradient(135deg, #121212, #1c1c1c);
-  border-radius: 18px;
-  box-shadow: 0 0 30px #7f00ff;
-  font-weight: 600;
-}
-
-#loginContainer {
-  max-width: 600px; /* 從 450px 增加 */
-  margin: 50px auto;
-  background: linear-gradient(135deg, #1f1f1f, #111111);
-  padding: 40px 35px;
-  border-radius: 18px;
-  box-shadow: 0 0 20px #00bfff;
-  text-align: center;
-  flex: 1;
-}
-
-#loginContainer h2 {
-  color: #00bfff;
-  font-weight: 800;
-  margin-bottom: 30px;
-  letter-spacing: 2px;
-  text-shadow: 0 0 10px #00bfff;
-}
-
-.login-box input[type="text"],
-.login-box input[type="password"] {
-  width: 85%;
-  padding: 14px 15px;
-  margin: 15px 0;
-  border-radius: 12px;
-  border: none;
-  background-color: #222;
-  font-size: 1.1rem;
-  box-shadow: inset 0 0 12px #7f00ff;
-  transition: background-color 0.3s ease, box-shadow 0.4s ease;
-}
-
-.login-box input[type="text"]:focus,
-.login-box input[type="password"]:focus {
-  background-color: #333;
-  outline: none;
-  box-shadow: inset 0 0 16px #00ffea;
-}
-
-.login-box button {
-  margin-top: 25px;
-  padding: 14px 30px;
-  background: linear-gradient(45deg, #ff0057, #00ffe7, #ffbf00);
-  background-size: 300% 300%;
-  border: none;
-  border-radius: 20px;
-  font-weight: 800;
-  font-size: 1.1rem;
-  cursor: pointer;
-  box-shadow: 0 0 15px #ff0057;
-  transition: background-position 1.5s ease, box-shadow 0.3s ease;
-  color: #000;
-}
-
-.login-box button:hover {
-  background-position: 100% 0;
-  box-shadow: 0 0 25px #00ffe7;
-}
-
-/* 新增商品區塊 */
-#addProductForm {
-  background: linear-gradient(135deg, #2b2b2b, #1a1a1a);
-  padding: 25px 30px;
-  border-radius: 18px;
-  box-shadow: 0 0 25px #7f00ff;
-  max-width: 1000px; /* 從 800px 增加 */
-  margin: 40px auto 60px;
-  font-weight: 700;
-  color: #eee;
-}
-
-#addProductForm h1 {
-  font-weight: 900;
-  font-size: 1.8rem;
-  margin-bottom: 25px;
-  text-shadow: 0 0 10px #9a00ff;
-  color: #fff;
-}
-
-#addProductForm label {
-  display: block;
-  margin-bottom: 20px;
-  font-size: 1.1rem;
-  color: #ccc;
-}
-
-#addProductForm input[type="text"],
-#addProductForm input[type="number"],
-#addProductForm input[type="file"] {
-  width: 100%;
-  padding: 12px 15px;
-  border-radius: 14px;
-  border: none;
-  background-color: #222;
-  font-size: 1.1rem;
-  box-shadow: inset 0 0 15px #7f00ff;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-  color: #fff;
-}
-
-#addProductForm input[type="text"]:focus,
-#addProductForm input[type="number"]:focus,
-#addProductForm input[type="file"]:focus {
-  background-color: #333;
-  outline: none;
-  box-shadow: inset 0 0 18px #ff8c00;
-  color: #fff;
-}
-
-#addProductForm button[type="submit"] {
-  background: linear-gradient(45deg, #ff0080, #00ffe7, #ffbf00);
-  background-size: 300% 300%;
-  padding: 12px 28px;
-  border-radius: 22px;
-  border: none;
-  font-weight: 900;
-  font-size: 1.1rem;
-  color: #000;
-  cursor: pointer;
-  box-shadow: 0 0 18px #ff0080;
-  transition: background-position 1.8s ease, box-shadow 0.4s ease;
-}
-
-#addProductForm button[type="submit"]:hover {
-  background-position: 100% 0;
-  box-shadow: 0 0 30px #00fff7;
-}
-
-/* 商品列表區塊 */
-h1 + hr {
-  margin-top: 60px; /* 商品列表標題下面的分隔線往下推 */
-}
-#productGrid > div {
-  padding: 15px; /* 內距縮小 */
-  font-weight: 700;
-  font-size: 0.85rem; /* 字體變小 */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  gap: 8px; /* 元素間距縮小 */
-  transition: box-shadow 0.3s ease;
-}
-
-#productGrid > div img {
-  width: 250px; /* 固定寬度 */
-  height: 180px; /* 固定高度 */
-  object-fit: contain; /* 保持圖片比例，空白填滿 */
-  background-color: #fff; /* 空白底色 */ /* 圖片變小 */
-  border-radius: 14px;
-  margin-bottom: 10px; /* 圖片和文字間距縮小 */
-  box-shadow: 0 0 14px #ff00a1;
-}
-
-#productGrid > div p,
-#productGrid > div button {
-  margin-top: 4px;
-  margin-bottom: 4px;
-  font-size: 0.85rem; /* 文字變小 */
-  line-height: 1.3;
-  color: white;
-  padding: 4px 8px; /* 按鈕內距縮小 */
-}
-
-#productButtonsContainer {
-  display: flex;
-  justify-content: flex-end;
-  gap: 12px; /* 按鈕間距 */
-  margin-bottom: 20px; /* 距離下面元素 */
-}
-
-/* 調整 max-width 以讓內容更寬 */
-#accountSettings,
-#logoChangeSection,
-#addProductForm {
-  background: #1c1c1c;
-  padding: 30px 35px;
-  border-radius: 20px;
-  box-shadow: inset 0 0 25px #7f00ff;
-  margin-bottom: 50px;
-  max-width: 1600px; /* 套用一致的更寬最大寬度 */
-  margin-left: auto; /* 讓區塊置中 */
-  margin-right: auto; /* 讓區塊置中 */
-}
-
-#accountSettings h2,
-#logoChangeSection h2,
-#addProductForm h1,
-#aboutSection h2 {
-  font-weight: 900;
-  margin-bottom: 20px;
-  text-shadow: 0 0 12px;
-  color: #fff;
-}
-
-#accountSettings label,
-#addProductForm label {
-  display: block;
-  margin-bottom: 20px;
-  font-weight: 700;
-  font-size: 1.1rem;
-}
-
-#accountSettings input,
-#addProductForm input[type="text"],
-#addProductForm input[type="number"],
-#addProductForm input[type="file"] {
-  width: 65%;
-  padding: 12px 14px;
-  border-radius: 14px;
-  border: none;
-  background-color: #2a2a2a;
-  font-size: 1.1rem;
-  box-shadow: inset 0 0 15px #00ffd7;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-#accountSettings input:focus,
-#addProductForm input:focus {
-  background-color: #3a3a3a;
-  outline: none;
-  box-shadow: inset 0 0 18px #ff8c00;
-}
-
-#accountSettings button[type="submit"],
-#addProductForm button {
-  background: linear-gradient(45deg, #ff0080, #00ffe7, #ffbf00);
-  background-size: 300% 300%;
-  padding: 14px 28px;
-  border-radius: 22px;
-  border: none;
-  font-weight: 900;
-  font-size: 1.2rem;
-  color: #000;
-  cursor: pointer;
-  box-shadow: 0 0 18px #ff0080;
-  transition: background-position 1.8s ease, box-shadow 0.4s ease;
-}
-
-#accountSettings button:hover,
-#addProductForm button:hover {
-  background-position: 100% 0;
-  box-shadow: 0 0 30px #00fff7;
-}
-
-#productGrid {
+/* ── Admin Product Grid ───────────────────────────────────────── */
+/* JS generates .shopee-card inside #productGrid; extend those styles */
+.admin-product-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-  gap: 28px;
-  margin-top: 30px;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
 }
 
-#productGrid > div {
-  background: #222;
-  border-radius: 18px;
-  box-shadow: 0 0 18px #ff00a1;
-  padding: 20px;
-  font-weight: 700;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  transition: box-shadow 0.3s ease;
-}
-
-#productGrid > div:hover {
-  box-shadow: 0 0 25px #00fff7;
-}
-
-#productGrid > div img {
-  max-width: 100%;
-  border-radius: 14px;
-  margin-bottom: 14px;
-  box-shadow: 0 0 14px #ff00a1;
-}
-
-#clearBtn,
-#restoreDefaultBtn {
-  background: linear-gradient(45deg, #ff00a0, #00fff7, #ff9500);
-  background-size: 300% 300%;
-  border: none;
-  padding: 14px 28px;
-  border-radius: 22px;
-  font-weight: 900;
-  cursor: pointer;
-  margin-right: 14px;
-  box-shadow: 0 0 22px #ff00a0;
-  transition: background-position 1.8s ease, box-shadow 0.4s ease;
-  color: #000;
-}
-
-#clearBtn:hover,
-#restoreDefaultBtn:hover {
-  background-position: 100% 0;
-  box-shadow: 0 0 35px #00fff7;
-}
-
-/* 調整 max-width 以讓內容更寬 */
-#aboutSection {
-  max-width:2000px; /* 從 1400px 增加 */
-  margin: 50px auto;
-   padding: 90px 100px;
-  background: #1a1a1a;
-  border-radius: 20px;
-  box-shadow: 0 0 25px #00fff7;
-  
-}
-
-#aboutSection h2 {
-  font-weight: 10000;
-  font-size: 1.6rem;
-  text-shadow: 0 0 10px #00fff7;
-  margin-bottom: 20px;
-}
-
-#aboutSection textarea {
-  width: 65%;
-  background-color: #222;
-  color: #fff;
-  border: none;
-  border-radius: 14px;
-  padding: 6px;
-  font-size: 1.1rem;
-  box-shadow: inset 0 0 15px #7f00ff;
-  resize: vertical;
-}
-
-#saveAboutBtn,
-#resetAboutBtn {
-  margin-top: 20px;
-  padding: 14px 24px;
-  border: none;
-  border-radius: 20px;
-  background: linear-gradient(45deg, #ff00ff, #00ffff);
-  background-size: 300% 300%;
-  font-weight: 800;
-  cursor: pointer;
-  box-shadow: 0 0 18px #ff00ff;
-  transition: background-position 1.5s ease, box-shadow 0.4s ease;
-  color: #000;
-}
-
-#saveAboutBtn:hover,
-#resetAboutBtn:hover {
-  background-position: 100% 0;
-  box-shadow: 0 0 28px #00ffff;
-}
-
-.shopee-card .quantity {
+/* Quantity row inside admin card */
+#productGrid .shopee-card .quantity {
   display: flex;
   align-items: center;
+  justify-content: center;
   gap: 6px;
-  font-size: 14px;
-  margin-top: 6px;
+  font-size: 12px;
+  color: var(--text-muted);
+  padding: 0 var(--sp-3) var(--sp-2);
 }
 
-.shopee-card .quantity button.qty-decrease,
-.shopee-card .quantity button.qty-increase {
-  width: 28px;
-  height: 28px;
-  font-size: 20px;
-  line-height: 1;
-  border: 1px solid #ccc;
-  background-color: #fff;
-  cursor: pointer;
-  border-radius: 4px;
-  user-select: none;
-  padding: 0;
+#productGrid .shopee-card .qty-input {
+  width: 52px;
+  height: 26px;
   text-align: center;
+  padding: 0 4px;
+  font-size: 13px;
+  border-radius: var(--r-sm);
 }
 
-.shopee-card .quantity input.qty-input {
-  width: 80px;
-  height: 28px;
-  font-size: 16px;
-  text-align: center;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  margin: 0;
-  color: black;
-}
-
-body {
-  background: #682191; /* 超暗黑色底 */
-  color: #eee; /* 字體淺色，方便閱讀 */
-  font-family: 'Orbitron', sans-serif; /* 電競感字體（可選） */
-}
-
-html,
-body {
-  height: 100%;
-  margin: 0;
-  padding: 0;
+#productGrid .shopee-card .qty-decrease,
+#productGrid .shopee-card .qty-increase {
+  width: 26px;
+  height: 26px;
   display: flex;
-  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-surface);
+  color: var(--cyan);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 700;
+  padding: 0;
+  transition: background var(--tr), border-color var(--tr);
 }
 
-body {
-  min-height: 100vh; /* 視窗高度 */
+#productGrid .shopee-card .qty-decrease:hover,
+#productGrid .shopee-card .qty-increase:hover {
+  background: var(--cyan-dim);
+  border-color: var(--border-bright);
 }
 
-main {
-  flex: 1; /* 讓 main 自動撐開剩餘空間 */
+/* Recommend and Delete buttons */
+#productGrid .shopee-card .recommend-btn,
+#productGrid .shopee-card .delete-btn {
+  margin: 0 var(--sp-3) var(--sp-2);
+  padding: 8px;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.06em;
+  border-radius: var(--r-md);
+  cursor: pointer;
+  border: 1px solid;
+  transition: background var(--tr), box-shadow var(--tr);
+  width: calc(100% - 24px);
 }
 
-.loginContainer {
+#productGrid .shopee-card .recommend-btn {
+  background: var(--cyan-dim);
+  color: var(--cyan);
+  border-color: rgba(0, 229, 255, 0.25);
+}
+
+#productGrid .shopee-card .recommend-btn:hover {
+  background: rgba(0, 229, 255, 0.20);
+  box-shadow: var(--glow-cyan);
+}
+
+#productGrid .shopee-card .delete-btn {
+  background: var(--pink-dim);
+  color: var(--pink);
+  border-color: rgba(244, 114, 182, 0.25);
+}
+
+#productGrid .shopee-card .delete-btn:hover {
+  background: rgba(244, 114, 182, 0.20);
+  box-shadow: var(--glow-pink);
+}
+
+/* ── About Section (inside sidebar card) ─────────────────────── */
+#aboutSection textarea {
+  resize: vertical;
+  min-height: 120px;
+  font-family: var(--font-body);
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.about-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 12px;
+}
+
+.about-actions .btn-primary,
+.about-actions .btn-ghost {
   flex: 1;
 }
 
+/* ── Responsive ───────────────────────────────────────────────── */
+@media (max-width: 1024px) {
+  .admin-main {
+    flex-direction: column;
+    padding: 20px 20px 48px;
+  }
 
-.conpyright {
-  width: 100%;
-  text-align: center;
-  margin: 20px 0 0;
-  padding: 10px 0;
-  background-color: #3e5293;
-  color: #70f6df;
+  .admin-sidebar {
+    width: 100%;
+  }
+
+  .admin-topbar {
+    padding: 14px 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .login-box {
+    padding: 36px 24px;
+  }
+
+  .admin-main {
+    padding: 16px 16px 48px;
+    gap: 16px;
+  }
+
+  .admin-product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 12px;
+  }
+
+  .product-list-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+@media (max-width: 480px) {
+  .login-box { padding: 28px 18px; }
+
+  .admin-main { padding: 12px 12px 48px; }
+
+  .product-list-actions {
+    width: 100%;
+  }
+
+  .product-list-actions button {
+    flex: 1;
+  }
 }
