@@ -1,4 +1,4 @@
-window.addEventListener("DOMContentLoaded", () => {
+window.addEventListener("DOMContentLoaded", async () => {
   // 導覽列連結高亮
   const links = document.querySelectorAll(".nav-link");
   links.forEach(link => {
@@ -7,29 +7,33 @@ window.addEventListener("DOMContentLoaded", () => {
     }
   });
 
-  // 自訂 Logo 載入
-  const savedLogo = localStorage.getItem("customLogo");
-  if (savedLogo) {
-    const logoImg = document.querySelector("img.logo");
-    if (logoImg) {
-      logoImg.src = savedLogo;
+  // 載入自訂 Logo
+  try {
+    const res = await fetch('/api/settings/customLogo');
+    const data = await res.json();
+    if (data.value) {
+      const logoImg = document.querySelector("img.logo");
+      if (logoImg) logoImg.src = data.value;
     }
-  }
+  } catch (e) {}
 
-  // 建立推薦商品卡片
+  // 載入推薦商品
   const featuredGrid = document.getElementById("featuredGrid");
-  const allProducts = JSON.parse(localStorage.getItem("products")) || [];
-  const recommendedIds = JSON.parse(localStorage.getItem("recommendedProductIds")) || [];
-  const featured = allProducts.filter(p => recommendedIds.includes(p.id)).slice(0, 5);
-
-  featured.forEach(p => {
-    const card = document.createElement("div");
-    card.className = "shopee-card";
-    card.innerHTML = `
-      <img src="${p.image}" alt="${p.name}" />
-      <div class="title">${p.name}</div>
-      <div class="price">NT$ ${p.price.toLocaleString()}</div>
-    `;
-    featuredGrid.appendChild(card);
-  });
+  try {
+    const res = await fetch('/api/products');
+    const products = await res.json();
+    const featured = products.filter(p => p.recommend).slice(0, 5);
+    featured.forEach(p => {
+      const card = document.createElement("div");
+      card.className = "shopee-card";
+      card.innerHTML = `
+        <img src="${p.image}" alt="${p.name}" />
+        <div class="title">${p.name}</div>
+        <div class="price">NT$ ${p.price.toLocaleString()}</div>
+      `;
+      featuredGrid.appendChild(card);
+    });
+  } catch (e) {
+    console.error('載入商品失敗', e);
+  }
 });

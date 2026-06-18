@@ -1,215 +1,192 @@
-/* 通用重置 */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
+/* ================================================================
+   index.css — 首頁專屬樣式（全域共用樣式請看 global.css）
+   ================================================================ */
 
-html, body {
-  width: 100%;
-  overflow-x: hidden;
-  font-family: "Segoe UI", sans-serif;
-  background: linear-gradient(135deg, #292b63, #3f2b96, #ff4f81);
-  min-height: 100vh;
+/* ── Hero Section ─────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  min-height: 460px;
   display: flex;
   flex-direction: column;
-  color: #ffffff;
-}
-
-/* Header */
-header.main-header {
-  width: 100%;
-  background: linear-gradient(90deg, #ff0040, #7d00ff, #007bff);
-  padding: 10px 0;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-  position: relative;
-  z-index: 1000;
-  min-width: 320px;
-}
-
-.nav-container {
-  width: 100%;
-  margin: 0;
-  padding: 0 20px;
-  display: flex;
   align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
+  justify-content: center;
+  padding: 80px 24px 48px;
+  overflow: hidden;
+  text-align: center;
+  gap: 40px;
 }
 
-.logo {
-  height: 70px;
+/* Subtle grid pattern */
+.hero-grid-bg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 229, 255, 0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 229, 255, 0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 40%, transparent 100%);
 }
 
-.main-nav {
+/* Background glow */
+.hero::after {
+  content: '';
+  position: absolute;
+  width: 600px;
+  height: 300px;
+  background: radial-gradient(ellipse, rgba(139, 92, 246, 0.12) 0%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.hero-inner {
+  position: relative;
+  z-index: 1;
   display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 20px;
 }
 
-.main-nav a {
-  text-decoration: none;
-  color: white;
-  font-size: 14px;
-  padding: 6px 12px;
-  border-radius: 4px;
-  transition: background 0.3s, color 0.3s;
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 18px;
+  background: rgba(0, 229, 255, 0.07);
+  border: 1px solid rgba(0, 229, 255, 0.28);
+  border-radius: 100px;
+  font-family: var(--font-ui);
+  font-size: 12px;
+  font-weight: 700;
+  color: var(--cyan);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  animation: badgePulse 3.5s ease-in-out infinite;
 }
 
-.main-nav a:hover {
-  background-color: rgba(0, 0, 0, 0.2);
+@keyframes badgePulse {
+  0%, 100% { border-color: rgba(0, 229, 255, 0.28); box-shadow: none; }
+  50%       { border-color: rgba(0, 229, 255, 0.60);
+              box-shadow: 0 0 14px rgba(0, 229, 255, 0.22); }
 }
 
-.main-nav a.active {
-  background-color: #fff;
-  color: #000;
+.hero-title {
+  font-family: var(--font-brand);
+  font-size: clamp(32px, 6vw, 64px);
+  font-weight: 900;
+  color: var(--text-primary);
+  line-height: 1.1;
+  letter-spacing: 0.02em;
 }
 
-/* 主要內容區 */
-main, .shopee-container {
-  flex: 1 0 auto;
-  width: 100%;
+.hero-desc {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--text-secondary);
+  line-height: 1.75;
+  max-width: 460px;
 }
 
-/* 熱門推薦商品區塊 */
+.hero-actions {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+/* Stats strip at bottom of hero */
+.hero-stats {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  overflow: hidden;
+  background: var(--bg-surface);
+}
+
+.stat {
+  flex: 1;
+  padding: 16px 32px;
+  text-align: center;
+  border-right: 1px solid var(--border);
+}
+
+.stat:last-child { border-right: none; }
+
+.stat-num {
+  font-family: var(--font-brand);
+  font-size: 26px;
+  font-weight: 900;
+  color: var(--cyan);
+  text-shadow: 0 0 6px rgba(0, 229, 255, 0.9),
+               0 0 20px rgba(0, 229, 255, 0.5);
+}
+
+.stat-num span {
+  font-size: 16px;
+  color: var(--purple);
+}
+
+.stat-label {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-top: 3px;
+}
+
+/* ── Featured Products Section ───────────────────────────────── */
 .shopee-container {
-  background: linear-gradient(120deg, #1c1b38, #3e1f47, #6f2dbd);
-  padding: 30px 0;
-  width: 100%;
+  flex: 1;
+  padding: 48px 24px;
+  background: linear-gradient(180deg, transparent 0%, rgba(13, 17, 23, 0.6) 100%);
 }
 
 .shopee-inner-container {
-  max-width: 1200px;
+  max-width: 1280px;
   margin: 0 auto;
-  padding: 0 20px;
 }
 
-.shopee-inner-container h2 {
-  font-size: 26px;
-  font-weight: bold;
-  color: #ffde59;
-  text-shadow: 0 0 10px #ffde59, 0 0 20px #ff00ff;
-  margin-bottom: 20px;
+/* ── Responsive ───────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .hero {
+    min-height: 360px;
+    padding: 56px 20px 36px;
+    gap: 28px;
+  }
+
+  .hero-stats {
+    width: 100%;
+    max-width: 400px;
+  }
+
+  .stat { padding: 14px 16px; }
+  .stat-num { font-size: 22px; }
+
+  .hero-actions { gap: 10px; }
 }
 
-/* 商品網格 */
-.shopee-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 20px;
-}
+@media (max-width: 480px) {
+  .hero { padding: 48px 16px 28px; }
 
-/* 商品卡片 */
-.shopee-card {
-  background: linear-gradient(145deg, #2a2d63, #3d1a52);
-  border: 2px solid #ff85a2;
-  border-radius: 12px;
-  overflow: hidden;
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  box-shadow: 0 0 10px #ff85a2, 0 0 15px #ff00ff33;
-}
+  .hero-stats {
+    flex-direction: column;
+    border-radius: var(--r-lg);
+  }
 
-.shopee-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 0 20px #ff00ff, 0 0 30px #00ffe7;
-}
+  .stat {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+    padding: 12px;
+  }
 
-.shopee-card img {
-  width: 100%;
-  height: 180px;
-  object-fit: cover;
-  border-bottom: 2px solid #ff66cc;
-}
+  .stat:last-child { border-bottom: none; }
 
-.shopee-card .title {
-  font-size: 15px;
-  padding: 12px;
-  height: 40px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  color: #ffffff;
-  text-align: center;
-}
-
-.shopee-card .price {
-  padding: 0 10px 12px;
-  color: #00ffe7;
-  font-weight: bold;
-  font-size: 17px;
-  text-align: center;
-  text-shadow: 0 0 6px #00ffe7;
-}
-
-/* footer */
-.conpyright {
-  flex-shrink: 0;
-  width: 100%;
-  text-align: center;
-  padding: 10px 0;
-  background-color: #3e5293;
-  color: #70f6df;
-  margin-top: aut;
-}
-
-/* 搜尋列 */
-.section-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 20px;
-  flex-wrap: wrap;
-}
-
-.floating-search-bar {
-  display: flex;
-  gap: 8px;
-  background: #251c37;
-  padding: 6px 10px;
-  border-radius: 8px;
-  border: 2px solid #00ffff;
-  box-shadow: 0 0 10px #00ffff;
-}
-
-.floating-search-bar input[type="text"] {
-  padding: 6px 10px;
-  font-size: 14px;
-  background-color: #342e68;
-  color: white;
-  width: 160px;
-  border: none;
-  border-radius: 4px;
-  outline: none;
-}
-
-.floating-search-bar input[type="text"]::placeholder {
-  color: #99ffff;
-}
-
-.floating-search-bar input[type="text"]:focus {
-  border: 1px solid #00ffff;
-  box-shadow: 0 0 6px #00ffff;
-  color: #00ffff;
-}
-
-.floating-search-bar button {
-  padding: 6px 12px;
-  background: linear-gradient(145deg, #00ffff, #ff66cc);
-  color: #ffffff;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
-  letter-spacing: 1px;
-  border-radius: 4px;
-  text-transform: uppercase;
-  box-shadow: 0 0 6px rgba(0, 255, 255, 0.5);
-  transition: background 0.3s, transform 0.2s;
-}
-
-.floating-search-bar button:hover {
-  background: linear-gradient(145deg, #33ffff, #ff99cc);
-  transform: scale(1.05);
+  .shopee-container { padding: 32px 16px; }
 }

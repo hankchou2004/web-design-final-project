@@ -1,24 +1,58 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-Hant">
   <head>
     <meta charset="utf-8">
-    <title>My Store 賣場首頁</title>
-    <link href="css/index.css" rel="stylesheet" type="text/css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>電競次元商城</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="css/global.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet">
   </head>
   <body>
     <header class="main-header">
       <div class="nav-container">
-        <img class="logo" src="image/logo.png" alt="Store Logo">
+        <img class="logo" id="siteLogo" src="image/logo.png" alt="電競次元商城">
         <nav class="main-nav">
-          <a href="index.html" class="nav-link">首頁</a>
-          <a href="page4/page4.html" class="nav-link">關於我們</a>
-          <a href="page1/page1.html" class="nav-link">商品頁</a>
-          <a href="page3/page3.html" class="nav-link">購物車</a>
-          <a href="page2/page2.html" class="nav-link">賣場管理</a>
+          <a href="index.html" class="active">首頁</a>
+          <a href="page4/page4.html">關於我們</a>
+          <a href="page1/page1.html">商品頁</a>
+          <a href="page3/page3.html">購物車</a>
+          <a href="page2/page2.html">賣場管理</a>
         </nav>
       </div>
     </header>
 
+    <!-- Hero Banner -->
+    <section class="hero">
+      <div class="hero-grid-bg"></div>
+      <div class="hero-inner">
+        <span class="hero-badge">⚡ 電競裝備旗艦店</span>
+        <h1 class="hero-title">掌握每一次<br><span class="gradient-text">制勝瞬間</span></h1>
+        <p class="hero-desc">頂規電競設備，全面升級你的戰場體驗。<br>鍵盤、滑鼠、耳機、螢幕一應俱全。</p>
+        <div class="hero-actions">
+          <a href="page1/page1.html" class="btn-primary">立即選購</a>
+          <a href="page4/page4.html" class="btn-outline">了解更多</a>
+        </div>
+      </div>
+      <div class="hero-stats">
+        <div class="stat">
+          <div class="stat-num">21<span>+</span></div>
+          <div class="stat-label">電競商品</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">100<span>%</span></div>
+          <div class="stat-label">原廠正品</div>
+        </div>
+        <div class="stat">
+          <div class="stat-num">24<span>h</span></div>
+          <div class="stat-label">快速出貨</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Products -->
     <section class="shopee-container">
       <div class="shopee-inner-container">
 
@@ -39,7 +73,7 @@
     </section>
 
     <div class="conpyright">
-      &copy; 2025 My Store 賣場 - 淡江大學資訊系統專題製作
+      &copy; 2025 電競次元商城 · 淡江大學資訊系統專題製作
     </div>
 
     <script src="js/setProducts.js"></script>
