@@ -1,37 +1,48 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-Hant">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>購物車</title>
-  <link href="../css/page3.css" rel="stylesheet" type="text/css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>購物車 | 電競次元商城</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;700;900&family=Rajdhani:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="../css/global.css" rel="stylesheet">
+  <link href="../css/page3.css" rel="stylesheet">
 </head>
 <body>
   <header class="main-header">
     <div class="nav-container">
-      <img class="logo" src="../image/logo.png" alt="Store Logo">
+      <img class="logo" id="siteLogo" src="../image/logo.png" alt="電競次元商城">
       <nav class="main-nav">
-        <a href="../index.html" class="nav-link">首頁</a>
-        <a href="../page4/page4.html" class="nav-link">關於我們</a>
-        <a href="../page1/page1.html" class="nav-link">商品頁</a>
-        <a href="page3.html" class="nav-link">購物車</a>
-        <a href="../page2/page2.html" class="nav-link">賣場管理</a>
+        <a href="../index.html">首頁</a>
+        <a href="../page4/page4.html">關於我們</a>
+        <a href="../page1/page1.html">商品頁</a>
+        <a href="page3.html" class="active">購物車</a>
+        <a href="../page2/page2.html">賣場管理</a>
       </nav>
     </div>
   </header>
 
-  <main>
+  <main class="cart-main">
+    <div class="cart-page-title">
+      <h2>購物車</h2>
+    </div>
     <div id="cartContainer" class="cart-container"></div>
   </main>
 
-  <div class="footer">
-    <div id="totalPrice">總金額：NT$ 0</div>
-    <button id="checkoutBtn">下單</button>
-    <button id="clearCartBtn">清空購物車</button>
+  <div class="cart-footer">
+    <div class="cart-footer-inner">
+      <div id="totalPrice" class="cart-total">總金額：NT$ 0</div>
+      <div class="cart-footer-actions">
+        <button id="checkoutBtn" class="btn-primary">下單結帳</button>
+        <button id="clearCartBtn" class="btn-danger">清空購物車</button>
+      </div>
+    </div>
   </div>
 
   <div class="conpyright">
-    &copy; 2025 My Store 賣場 - 淡江大學資訊系統專題製作
+    &copy; 2025 電競次元商城 · 淡江大學資訊系統專題製作
   </div>
 
   <script src="../js/page3.js"></script>

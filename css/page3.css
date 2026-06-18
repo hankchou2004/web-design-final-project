@@ -1,204 +1,228 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+/* ================================================================
+   page3.css — 購物車頁專屬樣式
+   ================================================================ */
+
+/* ── Main Area ────────────────────────────────────────────────── */
+.cart-main {
+  flex: 1;
+  padding: 32px 24px 120px; /* bottom padding for sticky footer */
 }
 
-body {
+.cart-page-title {
+  max-width: 900px;
+  margin: 0 auto 24px;
+}
+
+.cart-page-title h2 {
+  font-family: var(--font-brand);
+  font-size: 22px;
+  color: var(--text-primary);
+  letter-spacing: 0.1em;
+}
+
+.cart-container {
+  max-width: 900px;
+  margin: 0 auto;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  background: linear-gradient(135deg, #1f0036, #001f3f, #360048);
-  font-family: "Segoe UI", sans-serif;
-  color: #ffffff;
+  gap: 14px;
 }
 
-header.main-header {
-  width: 100%;
-  background: linear-gradient(90deg, #ff0040, #7d00ff, #007bff);
-  padding: 10px 0;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-  position: relative;
-  z-index: 1000;
-  min-width: 320px;
-}
-
-.nav-container {
-  width: 100%;
-  margin: 0;
-  padding: 0 20px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  flex-wrap: wrap;
-}
-
-.logo {
-  height: 70px;
-}
-
-.main-nav {
-  display: flex;
-  gap: 20px;
-}
-
-.main-nav a {
-  text-decoration: none;
-  color: white;
-  font-size: 14px;
-  padding: 6px 12px;
-  border-radius: 4px;
-  transition: background 0.3s, color 0.3s;
-}
-
-.main-nav a:hover {
-  background-color: rgba(0, 0, 0, 0.2);
-}
-
-.main-nav a.active {
-  background-color: #fff;
-  color: #000;
-}
-
-main {
-  flex: 1;
-}
-
-#cartContainer {
-  width: 90%;
-  max-width: 1200px;
-  margin: 20px auto;
-  box-sizing: border-box;
-}
-
-/* 購物車商品卡片 */
+/* ── Cart Item Card ───────────────────────────────────────────── */
 .cart-item {
   display: flex;
-  flex-wrap: wrap;
   align-items: center;
-  width: 100%;
-  border-radius: 10px;
-  padding: 15px;
-  margin-bottom: 15px;
-  background: linear-gradient(135deg, #1b1f38, #2c3e50);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  transition: box-shadow 0.3s ease;
+  gap: 18px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: 18px;
+  transition: border-color var(--tr), box-shadow var(--tr);
 }
 
 .cart-item:hover {
-  box-shadow: 0 6px 20px rgba(255, 0, 128, 0.4);
+  border-color: var(--border-bright);
+  box-shadow: var(--glow-cyan);
+}
+
+.cart-item input.select-item {
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
+  accent-color: var(--cyan);
+  cursor: pointer;
 }
 
 .cart-item img {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  background: var(--bg-elevated);
+  border-radius: var(--r-md);
+  padding: 8px;
   flex-shrink: 0;
-  width: 120px;
-  height: 120px;
-  object-fit: cover;
-  border-radius: 8px;
-  margin-right: 20px;
-  margin-bottom: 10px;
 }
 
 .cart-info {
-  flex: 1 1 300px;
-  min-width: 200px;
+  flex: 1;
+  min-width: 0;
 }
 
-.cart-item > input.select-item {
-  margin-right: 15px;
-  flex-shrink: 0;
-  width: 20px;
-  height: 20px;
+/* JS generates plain <div> children — target by position */
+.cart-info > div:first-child {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
-/* 按鈕區 */
+.cart-info > div:nth-child(2) {
+  font-family: var(--font-brand);
+  font-size: 14px;
+  color: var(--cyan);
+  margin-bottom: 12px;
+  text-shadow: 0 0 10px rgba(0, 229, 255, 0.3);
+}
+
+/* Quantity control row */
 .actions {
-  margin-top: 10px;
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
 }
 
 .actions button {
+  width: 30px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-elevated);
+  color: var(--cyan);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
   cursor: pointer;
-  border: none;
-  background: linear-gradient(to right, #00ffe7, #ff00d4);
-  color: #000;
-  padding: 6px 12px;
-  border-radius: 20px;
-  font-weight: bold;
-  transition: transform 0.3s, background 0.3s;
-}
-
-.actions button:disabled {
-  background: #555;
-  color: #aaa;
-  cursor: not-allowed;
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1;
+  transition: background var(--tr), border-color var(--tr), box-shadow var(--tr);
 }
 
 .actions button:hover:not(:disabled) {
-  transform: scale(1.05);
-  background: linear-gradient(to right, #ff33a8, #00c3ff);
+  background: var(--cyan-dim);
+  border-color: var(--border-bright);
+  box-shadow: var(--glow-cyan);
 }
 
-/* 總金額與下單清空區 */
-.footer {
-  display: flex;
-  justify-content: flex-end;
-  gap: 12px;
-  padding: 15px 20px;
-  background: linear-gradient(135deg, #1c1c2b, #292945);
-  font-weight: bold;
+.actions button:disabled {
+  color: var(--text-muted);
+  cursor: not-allowed;
+  border-color: var(--border);
+  background: transparent;
+}
+
+/* JS uses class="qty" on the quantity span */
+.actions .qty {
+  font-family: var(--font-brand);
   font-size: 16px;
-  color: #fff;
-  width: 90%;
-  max-width: 1200px;
-  margin: 0 auto 20px;
-  flex-wrap: wrap;
-  border-radius: 12px;
-  box-shadow: 0 0 10px rgba(255, 0, 255, 0.2);
-}
-
-.footer #totalPrice {
-  flex-grow: 1;
-  font-size: 18px;
-  color: #00ffe7;
-}
-
-.footer button {
-  padding: 10px 16px;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-size: 15px;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-.footer #checkoutBtn {
-  background: linear-gradient(to right, #12c2e9, #c471ed, #f64f59);
-  color: white;
-}
-
-.footer #checkoutBtn:hover {
-  transform: scale(1.05);
-  background: linear-gradient(to right, #f12711, #f5af19);
-}
-
-.footer #clearCartBtn {
-  background: linear-gradient(to right, #e53935, #e35d5b);
-  color: white;
-}
-
-.footer #clearCartBtn:hover {
-  transform: scale(1.05);
-  background: linear-gradient(to right, #ff6a00, #ee0979);
-}
-
-.conpyright {
-  width: 100%;
+  font-weight: 700;
+  color: var(--text-primary);
+  min-width: 28px;
   text-align: center;
-  margin: 20px 0 0;
-  padding: 10px 0px;
-  background-color: #3e5293;
-  color: #70f6df;
+}
+
+/* ── Cart Footer Bar (sticky bottom) ─────────────────────────── */
+.cart-footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 500;
+  background: rgba(13, 17, 23, 0.96);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid var(--border);
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.4);
+}
+
+.cart-footer-inner {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 14px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.cart-total {
+  font-family: var(--font-brand);
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--cyan);
+  text-shadow: 0 0 14px rgba(0, 229, 255, 0.4);
+  letter-spacing: 0.05em;
+}
+
+.cart-footer-actions {
+  display: flex;
+  gap: 12px;
+}
+
+/* ── Empty State (JS renders .no-cart-item) ───────────────────── */
+.no-cart-item {
+  text-align: center;
+  padding: 80px 24px;
+  color: var(--text-muted);
+  font-size: 18px;
+  letter-spacing: 0.05em;
+}
+
+/* ── Responsive ───────────────────────────────────────────────── */
+@media (max-width: 768px) {
+  .cart-main { padding: 24px 16px 110px; }
+
+  .cart-item {
+    gap: 14px;
+    padding: 14px;
+  }
+
+  .cart-item img {
+    width: 80px;
+    height: 80px;
+  }
+
+  .cart-footer-inner {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 12px 16px;
+    gap: 10px;
+  }
+
+  .cart-footer-actions {
+    width: 100%;
+  }
+
+  .cart-footer-actions button {
+    flex: 1;
+  }
+}
+
+@media (max-width: 480px) {
+  .cart-item {
+    flex-wrap: wrap;
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .cart-item img {
+    width: 70px;
+    height: 70px;
+  }
+
+  .cart-info .name { font-size: 14px; }
 }
