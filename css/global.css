@@ -1,0 +1,730 @@
+/* ================================================================
+   global.css — 電競次元商城 Design System
+   共用設計語言：所有頁面都引用此檔，個別 CSS 只寫頁面專屬樣式
+   ================================================================ */
+
+/* ── 0. CSS Design Tokens ──────────────────────────────────────── */
+:root {
+  /* ─ Backgrounds ─ */
+  --bg-base:      #04070F;   /* 主背景（深邃黑藍） */
+  --bg-surface:   #0A1022;   /* 卡片 */
+  --bg-elevated:  #101828;   /* 輸入框、hover */
+  --bg-hover:     #18243A;   /* 滑過高亮 */
+
+  /* ─ Brand Colors ─ */
+  --cyan:         #00E5FF;
+  --cyan-dim:     rgba(0, 229, 255, 0.10);
+  --cyan-mid:     rgba(0, 229, 255, 0.35);
+  --purple:       #8B5CF6;
+  --purple-dim:   rgba(139, 92, 246, 0.14);
+  --pink:         #F472B6;
+  --pink-dim:     rgba(244, 114, 182, 0.12);
+
+  /* ─ Text ─ */
+  --text-primary:   #EEF4FF;
+  --text-secondary: #7A8599;
+  --text-muted:     #3D4A60;
+
+  /* ─ Borders ─ */
+  --border:         rgba(0, 229, 255, 0.09);
+  --border-bright:  rgba(0, 229, 255, 0.45);
+
+  /* ─ Glows (multi-layer neon diffusion) ─ */
+  --glow-cyan:   0 0 6px rgba(0, 229, 255, 0.55),
+                 0 0 20px rgba(0, 229, 255, 0.28),
+                 0 0 50px rgba(0, 229, 255, 0.10);
+  --glow-purple: 0 0 6px rgba(139, 92, 246, 0.65),
+                 0 0 20px rgba(139, 92, 246, 0.32),
+                 0 0 50px rgba(139, 92, 246, 0.12);
+  --glow-pink:   0 0 6px rgba(244, 114, 182, 0.65),
+                 0 0 20px rgba(244, 114, 182, 0.32),
+                 0 0 50px rgba(244, 114, 182, 0.12);
+
+  /* ─ Typography ─ */
+  --font-brand:  'Orbitron', monospace;
+  --font-ui:     'Rajdhani', sans-serif;
+  --font-body:   'Inter', sans-serif;
+
+  /* ─ Spacing (4px grid) ─ */
+  --sp-1: 4px;  --sp-2: 8px;   --sp-3: 12px;
+  --sp-4: 16px; --sp-5: 20px;  --sp-6: 24px;
+  --sp-8: 32px; --sp-10: 40px; --sp-12: 48px;
+  --sp-16: 64px;
+
+  /* ─ Border radius ─ */
+  --r-sm: 4px; --r-md: 8px; --r-lg: 12px; --r-xl: 16px;
+
+  /* ─ Transitions ─ */
+  --tr: 0.25s ease;
+}
+
+/* ── 1. Reset ─────────────────────────────────────────────────── */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── 2. Base ──────────────────────────────────────────────────── */
+html, body {
+  min-height: 100vh;
+  width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  background-color: var(--bg-base);
+
+  /* ── CYBERPUNK BACKGROUND ──
+     Layer 1: dark overlay for text readability
+     Layer 2: background.png cityscape */
+  background-image:
+    linear-gradient(rgba(4, 7, 15, 0.4), rgba(4, 7, 15, 0.78)),
+    url('../image/background.png');
+  background-size: cover;
+  background-position: center top;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  font-size: 16px;
+  line-height: 1.6;
+  display: flex;
+  flex-direction: column;
+}
+
+a { text-decoration: none; color: inherit; }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-brand);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
+}
+
+/* ── 3. Scrollbar ─────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 5px; }
+::-webkit-scrollbar-track { background: var(--bg-surface); }
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, var(--purple), var(--cyan));
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, var(--cyan), var(--purple));
+}
+
+/* ── 4. Header ────────────────────────────────────────────────── */
+header.main-header {
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: rgba(6, 9, 18, 0.88);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+  box-shadow: 0 6px 28px rgba(0, 229, 255, 0.05), 0 1px 0 var(--border);
+}
+
+/* Animated RGB accent line */
+header.main-header::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: linear-gradient(90deg,
+    var(--cyan) 0%,
+    var(--purple) 33%,
+    var(--pink) 66%,
+    var(--cyan) 100%);
+  background-size: 200% 100%;
+  animation: rgbSlide 4s linear infinite;
+}
+
+@keyframes rgbSlide {
+  0%   { background-position: 0% 0%; }
+  100% { background-position: 200% 0%; }
+}
+
+.nav-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 var(--sp-6);
+  height: 70px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--sp-4);
+}
+
+.logo {
+  height: 48px;
+  width: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
+.main-nav {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-1);
+}
+
+.main-nav a {
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  padding: var(--sp-2) var(--sp-3);
+  border-radius: var(--r-md);
+  border: 1px solid transparent;
+  transition: color var(--tr), background var(--tr), border-color var(--tr),
+              text-shadow var(--tr), box-shadow var(--tr);
+  white-space: nowrap;
+}
+
+.main-nav a:hover {
+  color: var(--cyan);
+  background: var(--cyan-dim);
+  border-color: var(--border);
+  text-shadow: 0 0 10px rgba(0, 229, 255, 0.6);
+}
+
+.main-nav a.active {
+  color: var(--cyan);
+  background: var(--cyan-dim);
+  border-color: var(--border-bright);
+  text-shadow: 0 0 12px rgba(0, 229, 255, 0.7);
+  box-shadow: 0 0 16px rgba(0, 229, 255, 0.12), inset 0 0 6px rgba(0, 229, 255, 0.06);
+}
+
+/* ── 5. Footer ────────────────────────────────────────────────── */
+.conpyright {
+  flex-shrink: 0;
+  width: 100%;
+  text-align: center;
+  padding: var(--sp-4) var(--sp-6);
+  background: linear-gradient(to top, rgba(0, 229, 255, 0.03), var(--bg-surface));
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: 13px;
+  letter-spacing: 0.06em;
+  border-top: 1px solid var(--border);
+  margin-top: auto;
+}
+
+/* ── 6. Buttons ───────────────────────────────────────────────── */
+
+/* Primary — gradient cyan with shine sweep */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  padding: 12px 32px;
+  background: linear-gradient(90deg, #00E5FF 0%, #0099CC 100%);
+  color: #040C1A;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: var(--r-md);
+  cursor: pointer;
+  box-shadow: var(--glow-cyan);
+  transition: box-shadow var(--tr), transform var(--tr), filter var(--tr);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Shine sweep pseudo-element */
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  top: 0; left: -70%;
+  width: 45%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.32), transparent);
+  transform: skewX(-18deg);
+  transition: left 0.55s ease;
+}
+
+.btn-primary:hover::after { left: 125%; }
+
+.btn-primary:hover {
+  box-shadow: 0 0 18px rgba(0, 229, 255, 0.75),
+              0 0 40px rgba(0, 229, 255, 0.40),
+              0 0 70px rgba(0, 229, 255, 0.15);
+  transform: translateY(-2px);
+  filter: brightness(1.08);
+}
+
+/* Outline — bordered cyan */
+.btn-outline {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px 32px;
+  background: transparent;
+  color: var(--cyan);
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 14px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1px solid var(--cyan-mid);
+  border-radius: var(--r-md);
+  cursor: pointer;
+  transition: background var(--tr), box-shadow var(--tr), transform var(--tr),
+              border-color var(--tr), text-shadow var(--tr);
+}
+
+.btn-outline:hover {
+  background: var(--cyan-dim);
+  border-color: var(--cyan);
+  box-shadow: var(--glow-cyan);
+  transform: translateY(-2px);
+  text-shadow: 0 0 10px rgba(0, 229, 255, 0.5);
+}
+
+/* Ghost — subtle purple */
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 24px;
+  background: var(--purple-dim);
+  color: #C4B5FD;
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid rgba(139, 92, 246, 0.28);
+  border-radius: var(--r-md);
+  cursor: pointer;
+  transition: background var(--tr), box-shadow var(--tr), border-color var(--tr);
+}
+
+.btn-ghost:hover {
+  background: rgba(139, 92, 246, 0.24);
+  border-color: rgba(139, 92, 246, 0.5);
+  box-shadow: var(--glow-purple);
+}
+
+/* Danger — subtle pink/red */
+.btn-danger {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 24px;
+  background: var(--pink-dim);
+  color: var(--pink);
+  font-family: var(--font-ui);
+  font-weight: 600;
+  font-size: 13px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border: 1px solid rgba(244, 114, 182, 0.28);
+  border-radius: var(--r-md);
+  cursor: pointer;
+  transition: background var(--tr), box-shadow var(--tr), border-color var(--tr);
+}
+
+.btn-danger:hover {
+  background: rgba(244, 114, 182, 0.20);
+  border-color: rgba(244, 114, 182, 0.5);
+  box-shadow: var(--glow-pink);
+}
+
+/* ── 7. Form elements ─────────────────────────────────────────── */
+input[type="text"],
+input[type="password"],
+input[type="number"],
+input[type="email"],
+textarea,
+select {
+  width: 100%;
+  padding: 11px 16px;
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  font-family: var(--font-ui);
+  font-size: 15px;
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  outline: none;
+  transition: border-color var(--tr), box-shadow var(--tr);
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+textarea:focus {
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.09),
+              0 0 14px rgba(0, 229, 255, 0.10);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--text-muted);
+  font-family: var(--font-ui);
+}
+
+label {
+  display: block;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: var(--sp-2);
+}
+
+/* ── 8. Product Card ──────────────────────────────────────────── */
+.shopee-card {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  transition: border-color var(--tr), box-shadow var(--tr), transform var(--tr);
+}
+
+/* Gradient top line — appears on hover */
+.shopee-card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 2px;
+  background: linear-gradient(90deg,
+    transparent 0%, var(--cyan) 35%, var(--purple) 70%, transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.shopee-card:hover {
+  border-color: var(--border-bright);
+  box-shadow: var(--glow-cyan);
+  transform: translateY(-5px);
+}
+
+.shopee-card:hover::before { opacity: 1; }
+
+.shopee-card img {
+  width: 100%;
+  height: 175px;
+  object-fit: contain;
+  background: var(--bg-elevated);
+  padding: var(--sp-4);
+  transition: transform var(--tr);
+}
+
+.shopee-card:hover img { transform: scale(1.05); }
+
+.shopee-card .title {
+  font-family: var(--font-ui);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-primary);
+  padding: var(--sp-3) var(--sp-4) var(--sp-1);
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.shopee-card .price {
+  font-family: var(--font-brand);
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--cyan);
+  text-align: center;
+  padding: var(--sp-1) var(--sp-4) var(--sp-2);
+  text-shadow: 0 0 6px rgba(0, 229, 255, 0.9),
+               0 0 18px rgba(0, 229, 255, 0.5);
+}
+
+.shopee-card .stock {
+  font-size: 12px;
+  color: var(--text-muted);
+  text-align: center;
+  padding: 0 var(--sp-4) var(--sp-2);
+  letter-spacing: 0.05em;
+}
+
+.shopee-card .add-to-cart-btn {
+  margin: 0 var(--sp-4) var(--sp-4);
+  padding: 9px;
+  background: transparent;
+  color: var(--cyan);
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: 1px solid var(--border);
+  border-radius: var(--r-md);
+  cursor: pointer;
+  transition: background var(--tr), border-color var(--tr), box-shadow var(--tr),
+              text-shadow var(--tr);
+}
+
+.shopee-card .add-to-cart-btn:hover {
+  background: var(--cyan-dim);
+  border-color: var(--border-bright);
+  box-shadow: var(--glow-cyan);
+  text-shadow: 0 0 8px rgba(0, 229, 255, 0.5);
+}
+
+.shopee-card .add-to-cart-btn:disabled {
+  color: var(--text-muted);
+  border-color: var(--border);
+  cursor: not-allowed;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* ── 9. Product Grid ──────────────────────────────────────────── */
+.shopee-grid,
+#productGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(195px, 1fr));
+  gap: var(--sp-5);
+}
+
+/* ── 10. Search Bar ───────────────────────────────────────────── */
+.floating-search-bar {
+  display: flex;
+  align-items: center;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  padding: var(--sp-2) var(--sp-2) var(--sp-2) var(--sp-4);
+  gap: var(--sp-2);
+  transition: border-color var(--tr), box-shadow var(--tr);
+}
+
+.floating-search-bar:focus-within {
+  border-color: var(--cyan);
+  box-shadow: 0 0 0 3px rgba(0, 229, 255, 0.08),
+              0 0 16px rgba(0, 229, 255, 0.08);
+}
+
+.floating-search-bar input[type="text"] {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  padding: var(--sp-1) 0;
+  font-size: 14px;
+  width: 200px;
+}
+
+.floating-search-bar input[type="text"]:focus {
+  border: none;
+  box-shadow: none;
+}
+
+.floating-search-bar button {
+  padding: 8px 20px;
+  background: linear-gradient(90deg, #00E5FF 0%, #0099CC 100%);
+  color: #040C1A;
+  font-family: var(--font-ui);
+  font-weight: 700;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  border: none;
+  border-radius: var(--r-md);
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: box-shadow var(--tr), filter var(--tr);
+}
+
+.floating-search-bar button:hover {
+  box-shadow: var(--glow-cyan);
+  filter: brightness(1.1);
+}
+
+/* ── 11. Section Header ───────────────────────────────────────── */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--sp-4);
+  margin-bottom: var(--sp-6);
+}
+
+.section-header h2 {
+  font-family: var(--font-brand);
+  font-size: 18px;
+  background: linear-gradient(90deg, var(--text-primary) 0%, var(--cyan) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+/* ── 12. No-result ────────────────────────────────────────────── */
+.no-result {
+  text-align: center;
+  padding: var(--sp-16) var(--sp-6);
+  color: var(--text-muted);
+  font-size: 15px;
+  letter-spacing: 0.05em;
+}
+
+/* ── 13. Animated gradient text ───────────────────────────────── */
+.gradient-text {
+  background: linear-gradient(90deg,
+    var(--cyan) 0%, var(--purple) 35%, var(--pink) 65%, var(--cyan) 100%);
+  background-size: 200% auto;
+  animation: gradientFlow 5s linear infinite;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@keyframes gradientFlow {
+  0%   { background-position: 0% center; }
+  100% { background-position: 200% center; }
+}
+
+/* ── 14. Panel / card container ───────────────────────────────── */
+.panel {
+  background: var(--bg-surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-xl);
+  padding: var(--sp-8);
+}
+
+/* ── 15. Checkbox styling ─────────────────────────────────────── */
+input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--cyan);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* ── 16. Qty controls (admin) ─────────────────────────────────── */
+.qty-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-2);
+  justify-content: center;
+}
+
+.qty-controls button {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-elevated);
+  color: var(--cyan);
+  border: 1px solid var(--border);
+  border-radius: var(--r-sm);
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 700;
+  transition: background var(--tr), border-color var(--tr), box-shadow var(--tr);
+}
+
+.qty-controls button:hover {
+  background: var(--cyan-dim);
+  border-color: var(--border-bright);
+  box-shadow: var(--glow-cyan);
+}
+
+.qty-controls input {
+  width: 60px;
+  height: 28px;
+  text-align: center;
+  padding: 0;
+  font-size: 14px;
+  border-radius: var(--r-sm);
+}
+
+/* ── 17. Divider ──────────────────────────────────────────────── */
+hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: var(--sp-6) 0;
+}
+
+/* ── 18. Responsive ───────────────────────────────────────────── */
+
+/* Tablet (≤ 768px) */
+@media (max-width: 768px) {
+  body {
+    /* Fixed-attachment grid can cause mobile repaints — disable */
+    background-attachment: scroll;
+  }
+
+  .nav-container {
+    padding: 0 var(--sp-4);
+    height: 58px;
+  }
+
+  .logo { height: 36px; }
+
+  .main-nav { gap: 0; }
+
+  .main-nav a {
+    font-size: 11px;
+    padding: 4px 8px;
+    letter-spacing: 0.05em;
+  }
+
+  .shopee-grid,
+  #productGrid {
+    grid-template-columns: repeat(auto-fill, minmax(155px, 1fr));
+    gap: var(--sp-3);
+  }
+
+  .shopee-card img { height: 140px; }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .floating-search-bar { width: 100%; }
+
+  .floating-search-bar input[type="text"] {
+    flex: 1;
+    width: auto;
+  }
+}
+
+/* Mobile (≤ 480px) */
+@media (max-width: 480px) {
+  .main-nav a {
+    font-size: 10px;
+    padding: 4px 6px;
+  }
+
+  .btn-primary,
+  .btn-outline {
+    padding: 10px 18px;
+    font-size: 13px;
+  }
+
+  .shopee-grid,
+  #productGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--sp-3);
+  }
+
+  .panel { padding: var(--sp-5); }
+}
