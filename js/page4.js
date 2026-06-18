@@ -1,54 +1,93 @@
-window.addEventListener("DOMContentLoaded", () => {
-  // 你的全部 JS 內容都放這裡
-  const links = document.querySelectorAll(".nav-link");
-  links.forEach(link => {
-    if (location.href.includes(link.getAttribute("href"))) {
-      link.classList.add("active");
-    }
-  });
+// ── EmailJS 設定 ──────────────────────────────────────────────────
+const EMAILJS_PUBLIC_KEY  = "r0MyPDDOxNcOb5Ckp";
+const EMAILJS_SERVICE_ID  = "service_tfl6c2b";
+const EMAILJS_TEMPLATE_ID = "template_cmkwk0y";
+// ──────────────────────────────────────────────────────────────────
 
+window.addEventListener("DOMContentLoaded", async () => {
+  // 初始化 EmailJS
+  if (typeof emailjs !== "undefined") {
+    emailjs.init(EMAILJS_PUBLIC_KEY);
+  }
+
+  // 載入 Logo
+  try {
+    const res = await fetch('/api/settings/customLogo');
+    const data = await res.json();
+    if (data.value) {
+      const logoImg = document.querySelector("img.logo");
+      if (logoImg) logoImg.src = data.value;
+    }
+  } catch (e) {}
+
+  // 載入關於我們
+  const aboutUsContainer = document.getElementById("aboutUsContent");
+  if (aboutUsContainer) {
+    try {
+      const res = await fetch('/api/settings/aboutUs');
+      const data = await res.json();
+      if (data.value) {
+        aboutUsContainer.innerHTML = data.value.replace(/\n/g, "<br>");
+      }
+    } catch (e) {}
+  }
+
+  // 聯絡表單送出
   const chatForm = document.getElementById("chatForm");
   if (chatForm) {
-    chatForm.addEventListener("submit", function(e) {
+    chatForm.addEventListener("submit", function (e) {
       e.preventDefault();
-      const status = document.getElementById("chatStatus");
-      status.textContent = "訊息已成功傳送，感謝您的聯繫！";
-      setTimeout(() => {
-        status.textContent = "";
-      }, 2000);
+      const status  = document.getElementById("chatStatus");
+      const nameEl  = document.getElementById("chatName");
+      const msgEl   = document.getElementById("chatMessage");
+      const submitBtn = chatForm.querySelector("button[type='submit']");
+
+      const message = msgEl.value.trim();
+      if (!message) {
+        status.style.color = "var(--pink)";
+        status.textContent = "請輸入訊息內容。";
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = "傳送中…";
+      status.style.color = "var(--text-muted)";
+      status.textContent = "";
+
+      const now = new Date().toLocaleString("zh-TW", {
+        timeZone: "Asia/Taipei",
+        year: "numeric", month: "2-digit", day: "2-digit",
+        hour: "2-digit", minute: "2-digit"
+      });
+
+      emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+        name:    nameEl.value.trim() || "匿名訪客",
+        message: message,
+        time:    now,
+      })
+      .then(() => {
+        status.style.color = "var(--cyan)";
+        status.textContent = "✓ 訊息已成功傳送，感謝您的聯繫！";
+        chatForm.reset();
+        setTimeout(() => { status.textContent = ""; }, 4000);
+      })
+      .catch(() => {
+        status.style.color = "var(--pink)";
+        status.textContent = "✗ 傳送失敗，請稍後再試。";
+      })
+      .finally(() => {
+        submitBtn.disabled = false;
+        submitBtn.textContent = "傳送訊息";
+      });
     });
   }
 
-  const aboutUsContainer = document.getElementById("aboutUsContent");
-  if (aboutUsContainer) {
-    const savedContent = localStorage.getItem("aboutUs");
-    const defaultAboutUs = `在這個科技飛速發展、電競蓬勃興盛的時代，「電競次元商城」誕生於對遊戲文化的熱愛與對專業設備的堅持。我們深信，好的電競體驗來自於精準、高效與個性化的周邊設備。因此，我們致力於提供多樣化的電競產品，包括高規格的電競滑鼠、機械式鍵盤、環繞音效耳機、RGB燈效設備、電競椅、主題周邊與收藏商品等，滿足每一位玩家對裝備的所有想像。
-
-我們的選品團隊由一群電競愛好者、選手與硬體專家組成，秉持著嚴選與測試的精神，從品牌品質、耐用度、性價比到外觀設計進行全方位評估。無論你是剛踏入電競世界的新手，還是追求極致表現的職業玩家，都能在這裡找到最適合你的戰鬥裝備。
-
-「電競次元商城」不只是一間商店，更是一個屬於玩家的社群平台。我們關注市場趨勢，也聆聽使用者聲音，致力於推動本土電競文化，定期舉辦線上活動與新品評測分享，讓每位玩家都能參與其中，成為社群的一份子。
-
-我們承諾提供快速的出貨、貼心的客服與完善的售後服務，讓每一位顧客都能安心選購、滿意回購。選擇我們，就是選擇一種更專業、更講究的電競生活方式。`;
-
-    const content = savedContent || defaultAboutUs;
-    aboutUsContainer.innerHTML = content.replace(/\n/g, "<br>");
-  }
-
+  // 開關聊天視窗
   const chatToggle = document.querySelector('.chat-toggle');
   if (chatToggle) {
     chatToggle.addEventListener('click', () => {
       const chatFloat = document.querySelector('.chat-float');
-      if (chatFloat) {
-        chatFloat.classList.toggle('hidden');
-      }
+      if (chatFloat) chatFloat.classList.toggle('hidden');
     });
-  }
-
-  const savedLogo = localStorage.getItem("customLogo");
-  if (savedLogo) {
-    const logoImg = document.querySelector("img.logo");
-    if (logoImg) {
-      logoImg.src = savedLogo;
-    }
   }
 });
