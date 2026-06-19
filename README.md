@@ -2,7 +2,7 @@
 
 > 網頁設計課程期末專題 — 淡江大學資訊系統專題製作
 
-🌐 線上展示網址：（部署後填入 Railway 網址）
+🌐 線上展示網址：https://web-design-final-project-production.up.railway.app
 
 ---
 
@@ -173,4 +173,4 @@ GRANT ALL PRIVILEGES ON DATABASE store_db TO store_user;
 
 ## 📄 授權
 
-本專案僅供學術用途，版權所有 © 2025 My Store 賣場
+本專案僅供學術用途，版權所有 © 2026 電競次元商城
